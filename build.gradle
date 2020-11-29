@@ -1,0 +1,66 @@
+buildscript {
+    ext {
+        springBootVersion = '2.3.5.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('se.transmode.gradle:gradle-docker:1.2')
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'docker'
+apply plugin: 'war'
+
+jar {
+    manifest {
+        attributes("Implementation-Title": "Gradle",
+                "Implementation-Version": archiveVersion)
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+task buildDocker(type: Docker, dependsOn: build) {
+    applicationName = 'persona_backend'
+    dockerfile = file('docker/Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into "${stageDir}/target"
+        }
+    }
+}
+
+configurations {
+    compile.exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    compile.exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.3.5.RELEASE'
+//    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.3.5.RELEASE', {
+//        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+//    }
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '2.3.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.3.5.RELEASE'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.22'
+    compile group: 'org.liquibase', name: 'liquibase-core', version: '4.1.1'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.3.5.RELEASE'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
+    testCompileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
+    testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
+}

@@ -1,0 +1,2 @@
+server:
+  contextPath: /v1/api

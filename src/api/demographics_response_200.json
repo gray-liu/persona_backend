@@ -1,0 +1,10 @@
+[
+  {
+    "name": "mike",
+    "gender": 1,
+    "age": 33,
+    "telephone": 153292342,
+    "email": "mike@persona.org",
+    "address": "家庭住址"
+  }
+]

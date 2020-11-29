@@ -1,0 +1,10 @@
+{
+    "url": "/api",
+    "apis": [
+        {
+            "url": "/demographics",
+            "method": "get",
+            "response": "demographics_response_200"
+        }
+    ]
+}
