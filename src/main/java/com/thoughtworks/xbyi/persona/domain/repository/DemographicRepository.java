@@ -1,8 +1,9 @@
 package com.thoughtworks.xbyi.persona.domain.repository;
 
 import com.thoughtworks.xbyi.persona.domain.entity.Demographic;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-
-public interface DemographicRepository extends CrudRepository<Demographic, Long> {
+@Repository
+public interface DemographicRepository extends JpaRepository<Demographic, Long> {
 }

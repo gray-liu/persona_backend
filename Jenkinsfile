@@ -21,8 +21,8 @@ node('local') {
         sh 'gradle test'
     }
 
-    stage('Build Production Docker Image') {
-        echo 'Build...'
-        sh 'gradle buildDocker -x test'
-    }
+//     stage('Build Production Docker Image') {
+//         echo 'Build...'
+//         sh 'gradle buildDocker -x test'
+//     }
 }

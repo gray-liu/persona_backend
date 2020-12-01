@@ -1,30 +1,16 @@
 package com.thoughtworks.xbyi.persona.domain.entity;
 
 import com.thoughtworks.xbyi.persona.infrastructure.BasePersistentObject;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-@Entity
+@Entity(name="persona_demographic")
+@Data
+@EqualsAndHashCode(callSuper=false)
 public class Demographic extends BasePersistentObject {
-    @Column
-    private String name;
-
-    @Column
-    private Integer gender;
-
-    @Column
-    private Integer age;
-
-    @Column
-    private String telephone;
-
-    @Column
-    private String email;
-
-    @Column
-    private String address;
-
     public String getName() {
         return name;
     }
@@ -72,4 +58,22 @@ public class Demographic extends BasePersistentObject {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Column
+    private String name;
+
+    @Column
+    private Integer gender;
+
+    @Column
+    private Integer age;
+
+    @Column
+    private String telephone;
+
+    @Column
+    private String email;
+
+    @Column
+    private String address;
 }

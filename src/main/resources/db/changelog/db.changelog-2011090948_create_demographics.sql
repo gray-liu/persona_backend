@@ -13,5 +13,6 @@ create table demographics (
     updated datetime,
     created_by varchar,
     status int
+
 );
 --rollback drop table test

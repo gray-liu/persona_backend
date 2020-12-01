@@ -1,10 +1,12 @@
+debug: true
+
 logging:
   level:
     org.springframework: INFO
     com.thoughtworks.xbyi.persona: DEBUG
 
 server:
-  port: 8088
+  port: 8080
   servlet:
     contextPath: /v1/api
 
@@ -13,6 +15,11 @@ spring:
     url: jdbc:mysql://localhost:3306/persona
     username: root
     password: root
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto=create:
+        show_sql: true
+        format_sql: true
   liquibase:
     changeLog: classpath:/db/changelog/db.changelog-master.xml
-

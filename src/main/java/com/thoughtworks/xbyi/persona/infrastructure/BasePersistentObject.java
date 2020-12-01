@@ -1,26 +1,17 @@
 package com.thoughtworks.xbyi.persona.infrastructure;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import lombok.Data;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
+@Data
 public class BasePersistentObject {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column
-    private Date created;
-
-    @Column
-    private Date updated;
-
-    @Column
-    private String createBy;
-
-    @Column
-    private Integer status;
 
     public Long getId() {
         return id;
@@ -46,12 +37,12 @@ public class BasePersistentObject {
         this.updated = updated;
     }
 
-    public String getCreateBy() {
-        return createBy;
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
     public Integer getStatus() {
@@ -61,4 +52,16 @@ public class BasePersistentObject {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+    @Column
+    private Date created;
+
+    @Column
+    private Date updated;
+
+    @Column
+    private String createdBy;
+
+    @Column
+    private Integer status;
 }
